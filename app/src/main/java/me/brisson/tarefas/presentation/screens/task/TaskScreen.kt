@@ -72,15 +72,18 @@ internal fun TaskScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(horizontal = 16.dp)
+            .background(MaterialTheme.colorScheme.background),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             IconButton(onClick = onBackClick) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onBackground
+                )
             }
 
             if (showSaveButton) {
@@ -99,11 +102,15 @@ internal fun TaskScreen(
         }
 
         BasicTextField(
-            modifier = Modifier.padding(vertical = 12.dp),
+            modifier = Modifier.padding(top = 4.dp, start = 16.dp, end = 16.dp),
             value = name,
             onValueChange = { name = it },
             singleLine = true,
-            textStyle = TextStyle(fontWeight = FontWeight.Medium, fontSize = 18.sp),
+            textStyle = TextStyle(
+                fontWeight = FontWeight.Medium,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onBackground
+            ),
             decorationBox = { innerTextField ->
                 Box(modifier = Modifier.fillMaxWidth()) {
                     innerTextField()
@@ -121,9 +128,10 @@ internal fun TaskScreen(
             },
         )
 
-        Divider(modifier = Modifier.padding(vertical = 16.dp), thickness = 0.4.dp)
+        Divider(modifier = Modifier.padding(16.dp), thickness = 0.4.dp)
 
         Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
             text = "Description",
             style = TextStyle(
                 fontSize = 12.sp,
@@ -132,11 +140,12 @@ internal fun TaskScreen(
         )
 
         BasicTextField(
-            modifier = Modifier.padding(vertical = 12.dp),
+            modifier = Modifier.padding(16.dp),
             value = description,
             onValueChange = { description = it },
-            singleLine = true,
-            textStyle = MaterialTheme.typography.bodyMedium,
+            textStyle = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onBackground
+            ),
             decorationBox = { innerTextField ->
                 Box(modifier = Modifier.fillMaxWidth()) {
                     innerTextField()
@@ -144,6 +153,7 @@ internal fun TaskScreen(
                         Text(
                             text = "Description...",
                             style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
                         )
                     }
                 }
@@ -157,7 +167,7 @@ internal fun TaskScreen(
 private fun PreviewTaskScreen() {
     val task = Task(
         id = "",
-        name = "",
+        name = "piru",
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     )
 
