@@ -75,7 +75,9 @@ internal fun TaskScreen(
             .background(MaterialTheme.colorScheme.background),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             IconButton(onClick = onBackClick) {
@@ -126,6 +128,11 @@ internal fun TaskScreen(
                     }
                 }
             },
+        )
+
+        TaskFields(
+            modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp),
+            dateTimeMillis = System.currentTimeMillis(),
         )
 
         Divider(modifier = Modifier.padding(16.dp), thickness = 0.4.dp)

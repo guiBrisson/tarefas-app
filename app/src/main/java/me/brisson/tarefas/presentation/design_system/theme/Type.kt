@@ -27,12 +27,12 @@ val Typography = Typography(
     ),
     bodyMedium = TextStyle(
         fontFamily = DMSans,
-        fontSize = 12.sp,
+        fontSize = 14.sp,
         fontWeight = FontWeight.Normal,
     ),
     bodySmall = TextStyle(
         fontFamily = DMSans,
-        fontSize = 10.sp,
+        fontSize = 12.sp,
         fontWeight = FontWeight.Normal,
     )
 )
