@@ -62,10 +62,12 @@ internal fun TaskScreen(
     onBackClick: () -> Unit,
 ) {
     var name by remember { mutableStateOf("") }
+    var dateTimeMillis by remember { mutableStateOf<Long?>(null) }
     var description by remember { mutableStateOf("") }
 
     LaunchedEffect(key1 = task) {
         name = task?.name ?: ""
+        dateTimeMillis = task?.dateTimeMillis
         description = task?.description ?: ""
     }
 
@@ -90,10 +92,11 @@ internal fun TaskScreen(
 
             if (showSaveButton) {
                 TextButton(onClick = {
-                    val modifiedTask = task?.copy(
+                    val modifiedTask = (task ?: Task.new()).copy(
                         name = name,
-                        description = description
-                    ) ?: Task.new()
+                        dateTimeMillis = dateTimeMillis,
+                        description = description,
+                    )
 
                     saveTask(modifiedTask)
                 }) {
@@ -132,7 +135,8 @@ internal fun TaskScreen(
 
         TaskFields(
             modifier = Modifier.padding(top = 12.dp, start = 16.dp, end = 16.dp),
-            dateTimeMillis = System.currentTimeMillis(),
+            dateTimeMillis = dateTimeMillis,
+            onDateChanged = { dateTimeMillis = it }
         )
 
         Divider(modifier = Modifier.padding(16.dp), thickness = 0.4.dp)
@@ -174,7 +178,8 @@ internal fun TaskScreen(
 private fun PreviewTaskScreen() {
     val task = Task(
         id = "",
-        name = "piru",
+        name = "Lorem ipsum",
+        dateTimeMillis = System.currentTimeMillis(),
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     )
 

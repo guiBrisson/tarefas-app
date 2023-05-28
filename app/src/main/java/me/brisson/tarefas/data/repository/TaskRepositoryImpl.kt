@@ -31,6 +31,7 @@ class TaskRepositoryImpl @Inject constructor(
     private fun Task.asEntity() = TaskEntity(
         id = id,
         name = name,
+        dateTimeMillis = dateTimeMillis,
         description = description
     )
 }

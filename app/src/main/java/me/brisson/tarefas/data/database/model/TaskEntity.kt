@@ -9,11 +9,13 @@ data class TaskEntity(
     @PrimaryKey
     val id: String,
     val name: String,
+    val dateTimeMillis: Long?,
     val description: String?,
 )
 
 fun TaskEntity.asExternalModel() = Task(
     id = id,
     name = name,
+    dateTimeMillis = dateTimeMillis,
     description = description
 )
