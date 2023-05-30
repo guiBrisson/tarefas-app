@@ -44,7 +44,7 @@ fun TaskFields(
 ) {
     val context = LocalContext.current
     val dateHandler = TaskDateHandler(context, dateTimeMillis)
-    val (formattedDate, formattedTime) = dateHandler.formattedDateAndTime()
+    val formattedDate = dateHandler.formattedDateAndTime()
     var showDatePicker by remember { mutableStateOf(false) }
 
     if (showDatePicker) {
@@ -87,27 +87,19 @@ fun TaskFields(
             horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(
-                text = formattedDate ?: "",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground,
-            )
-
-            if (!formattedDate.isNullOrEmpty() && !formattedTime.isNullOrEmpty()) {
-                Text(text = "•", color = MaterialTheme.colorScheme.onBackground)
-            } else {
+            if (formattedDate.isNullOrEmpty()) {
                 Text(
                     text = "set due date",
                     color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
                     style = MaterialTheme.typography.bodySmall,
                 )
+            } else {
+                Text(
+                    text = formattedDate,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
             }
-
-            Text(
-                text = formattedTime ?: "",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground,
-            )
         }
 
     }
@@ -134,6 +126,9 @@ private fun DialogPickerDate(
         dayInSelectionRangeContentColor = MaterialTheme.colorScheme.onSurface,
         dayInSelectionRangeContainerColor = MaterialTheme.colorScheme.onSurface,
         yearContentColor = MaterialTheme.colorScheme.onSurface,
+        selectedYearContainerColor = MaterialTheme.colorScheme.primary,
+        selectedYearContentColor = MaterialTheme.colorScheme.onSurface,
+
     )
 
     DatePickerDialog(
